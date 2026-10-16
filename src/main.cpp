@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
+#include <Geode/ui/SceneManager.hpp>
 #include <chrono>
 #include <map>
 #include <vector>
@@ -115,7 +116,7 @@ protected:
     }
 
     void sendKey(enumKeyCodes code, bool down) {
-        CCDirector::get()->getKeyboardDispatcher()->dispatchKeyboardMSG(code, down, false);
+        CCDirector::get()->getKeyboardDispatcher()->dispatchKeyboardMSG(code, down, false, nowSeconds());
     }
 
     void pressKey(size_t idx) {
@@ -299,7 +300,7 @@ class $modify(MenuLayer) {
         if (!created) {
             created = true;
             auto overlay = KeyboardOverlay::create();
-            if (overlay) SceneManager::get()->keepAcrossScenes(overlay);
+            if (overlay) geode::SceneManager::get()->keepAcrossScenes(overlay);
         }
         return true;
     }
